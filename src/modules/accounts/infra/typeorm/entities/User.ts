@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm"
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ResetToken } from "./ResetToken";
+import { Complaint } from "../../../../complaints/infra/typeorm/entities/Complaint";
+
+export enum UserTypeEnum {
+  MANAGER = 'manager',
+  CLIENT = 'client'
+}
 
 @Entity("users")
 export class User {
@@ -8,5 +15,28 @@ export class User {
   @Column()
   name: string;
 
-  // ...
+  @Column()
+  password: string;
+
+  @Column({ unique: true })
+  email: string;
+
+  @Column({
+    type: 'enum',
+    enum: UserTypeEnum,
+    default: UserTypeEnum.CLIENT,
+  })
+  type: UserTypeEnum;
+
+  @CreateDateColumn({ type: 'timestamp with time zone', nullable: true })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp with time zone', nullable: true })
+  updated_at: Date;
+
+  @OneToMany(() => Complaint, (complaint) => complaint.user)
+  complaints: Complaint[];
+
+  @OneToMany(() => ResetToken, (resetToken) => resetToken.user)
+  resetTokens: ResetToken[];
 }
