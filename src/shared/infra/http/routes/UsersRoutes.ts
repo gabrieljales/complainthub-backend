@@ -5,8 +5,9 @@ import { UsersController } from "../../../../modules/accounts/controllers/UsersC
 
 const usersRoutes = Router(); // Instanciando um Router
 
-const usersController = new UsersController();
+const usersController = new UsersController(); // Instanciando um UsersController
 
-usersRoutes.post("/", usersController.create);
+usersRoutes.post("/", usersController.create); // Rota para criar um usuário: POST /users
+usersRoutes.get("/", usersController.list); // Rota para listar usuários: GET /users
 
 export { usersRoutes };
