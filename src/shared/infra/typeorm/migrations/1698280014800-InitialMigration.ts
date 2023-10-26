@@ -38,7 +38,8 @@ export class InitialMigration1698280014800 implements MigrationInterface {
     await queryRunner.query(`
             CREATE TABLE "users" (
                 "id" SERIAL NOT NULL, 
-                "name" character varying NOT NULL, 
+                "name" character varying NOT NULL,
+                "last_name" character varying NOT NULL,  
                 "password" character varying NOT NULL, 
                 "email" character varying NOT NULL, 
                 "type" "public"."users_type_enum" NOT NULL DEFAULT 'client', 

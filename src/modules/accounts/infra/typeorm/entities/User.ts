@@ -7,13 +7,16 @@ export enum UserTypeEnum {
   CLIENT = 'client'
 }
 
-@Entity("users")
+@Entity("users") // Nome da tabela é users
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   name: string;
+
+  @Column()
+  last_name: string;
 
   @Column()
   password: string;
@@ -26,7 +29,7 @@ export class User {
     enum: UserTypeEnum,
     default: UserTypeEnum.CLIENT,
   })
-  type: UserTypeEnum;
+  type?: UserTypeEnum;
 
   @CreateDateColumn({ type: 'timestamp with time zone', nullable: true })
   created_at: Date;
