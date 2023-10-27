@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { UsersService } from "../services/UsersService";
 
-class UsersController {
+export class UsersController {
   async create(request: Request, response: Response): Promise<Response> {
     // Extraindo dados do corpo da requisição
     const { email, last_name, name, password, type } = request.body;
@@ -28,5 +28,3 @@ class UsersController {
     return response.json(users);
   }
 }
-
-export { UsersController };
