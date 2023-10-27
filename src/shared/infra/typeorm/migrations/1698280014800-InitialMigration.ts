@@ -19,9 +19,10 @@ export class InitialMigration1698280014800 implements MigrationInterface {
     // Cria a tabela complaints
     await queryRunner.query(`
             CREATE TABLE "complaints" (
-                "id" SERIAL NOT NULL, 
+                "id" SERIAL NOT NULL,
+                "title" character varying NOT NULL,
                 "description" character varying NOT NULL, 
-                "status" "public"."complaint_status_enum" NOT NULL DEFAULT 'underAnalysis', 
+                "status" "public"."complaint_status_enum" NOT NULL DEFAULT 'unsolved', 
                 "user_id" integer, 
                 "created_at" TIMESTAMP NOT NULL DEFAULT now(), 
                 "updated_at" TIMESTAMP NOT NULL DEFAULT now(), 

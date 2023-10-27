@@ -13,14 +13,17 @@ export class Complaint {
   id: number;
 
   @Column()
+  title: string;
+
+  @Column()
   description: string;
 
   @Column({
     type: 'enum',
     enum: ComplaintStatusEnum,
-    default: ComplaintStatusEnum.UNDER_ANALYSIS,
+    default: ComplaintStatusEnum.UNSOLVED,
   })
-  status: ComplaintStatusEnum;
+  status?: ComplaintStatusEnum;
 
   @ManyToOne(() => User, (user) => user.complaints)
   @JoinColumn({
