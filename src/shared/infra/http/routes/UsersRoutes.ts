@@ -13,8 +13,8 @@ usersRoutes.post("/", usersController.create); // Rota para criar um usuário: P
 
 usersRoutes.get(
   "/",
-  EnsureAuthenticated,
-  EnsureManager,
+  EnsureAuthenticated, // Garantir que o usuário esteja autenticado
+  EnsureManager, // Garantir que o usuário seja um manager
   usersController.list); // Rota para listar usuários: GET /users
 
 usersRoutes.get(
