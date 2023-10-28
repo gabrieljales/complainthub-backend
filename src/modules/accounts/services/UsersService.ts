@@ -3,6 +3,7 @@ import { AppError } from "../../../shared/errors/App.Error";
 import { User } from "../infra/typeorm/entities/User";
 import { UsersRepository } from "../infra/typeorm/repositories/UsersRepository";
 import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
+import { Complaint } from "../../complaints/infra/typeorm/entities/Complaint";
 
 export class UsersService {
   // Método responsável por criar um usuário
@@ -44,16 +45,32 @@ export class UsersService {
   }
 
   // Método responsável por buscar um usuário por id
-  async findById(id: number): Promise<User> {
-    const user = await UsersRepository.findOne({ where: { id } });
-
+  // Observação: relations é um parâmetro opcional para quando quisermos incluir uma relação na busca
+  async findById(id: number, relations?: string[]): Promise<User> {
+    const user = await UsersRepository.findOne({ where: { id }, relations });
+  
     return user;
   }
-  
+
   // Método responsável por buscar um usuário por email
   async findByEmail(email: string): Promise<User> {
     const user = await UsersRepository.findOne({ where: { email } });
 
     return user;
+  }
+
+  // Método responsável por buscar reclamações por id do usuário
+  async findAllComplaintsByUserId(user_id: number): Promise<Complaint[]> {
+    const user = await this.findById(user_id, ["complaints"]);
+  
+    // Se o usuário não existir, devemos lançar um erro BadRequest
+    if (!user) {
+      throw new AppError("User not found", 404);
+    }
+
+    // Ordenar as reclamações, por ID, em ordem decrescente e sem alterar o array original
+    const userComplaintsInDescOrder = [...user.complaints].sort((a, b) => b.id - a.id);
+  
+    return userComplaintsInDescOrder;
   }
 }
