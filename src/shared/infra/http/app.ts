@@ -22,6 +22,12 @@ PostgresDataSource.initialize()
   });
 
 const app = express(); // Cria uma instância de uma aplicação Express
+
+// Utiliza o middleware CORS para permitir que o frontend acesse a API
+// CORS (Cross-Origin Resource Sharing) é uma medida de segurança que permite
+// que recursos de um domínio sejam acessados por outro domínio
+app.use(cors());
+
 app.use(express.json()); // Middleware para analisar dados JSON nas requisições
 
 app.use(router); // Utilizando as rotas criadas
@@ -45,3 +51,7 @@ app.use(
 );
 
 export { app };
+
+function cors(): any {
+  throw new Error("Function not implemented.");
+}
