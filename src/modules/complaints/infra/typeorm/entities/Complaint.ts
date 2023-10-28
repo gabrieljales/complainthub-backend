@@ -3,7 +3,7 @@ import { User } from "../../../../accounts/infra/typeorm/entities/User";
 
 export enum ComplaintStatusEnum {
   SOLVED = 'solved',
-  UNDER_ANALYSIS = 'underAnalysis',
+  PENDING = 'pending',
   UNSOLVED = 'unsolved',
 }
 

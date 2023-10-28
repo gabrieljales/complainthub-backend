@@ -13,7 +13,7 @@ export class InitialMigration1698280014800 implements MigrationInterface {
 
     // Cria a enumeração complaint_status_enum
     await queryRunner.query(`
-            CREATE TYPE "public"."complaint_status_enum" AS ENUM('solved', 'underAnalysis', 'unsolved')
+            CREATE TYPE "public"."complaint_status_enum" AS ENUM('solved', 'pending', 'unsolved')
         `);
 
     // Cria a tabela complaints
