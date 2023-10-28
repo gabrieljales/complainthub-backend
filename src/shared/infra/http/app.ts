@@ -3,6 +3,8 @@
 
 import "reflect-metadata"; // Import necessário para o TypeOrm funcionar
 
+import cors from "cors";
+
 import * as dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors"; // Utilizado para tratar erros assíncronos
@@ -51,7 +53,3 @@ app.use(
 );
 
 export { app };
-
-function cors(): any {
-  throw new Error("Function not implemented.");
-}
