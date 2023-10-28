@@ -30,7 +30,7 @@ export class UsersController {
   }
 
   async findAllComplaintsByUserId(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { id } = request.user; // Obtendo id do usuário autenticado/logado
 
     const usersService = new UsersService();
 
