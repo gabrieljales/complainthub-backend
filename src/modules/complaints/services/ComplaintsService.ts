@@ -56,11 +56,11 @@ export class ComplaintsService {
   // Método responsável por deletar uma reclamação de acordo com o id
   async delete(id: number, user_id: number, type: string): Promise<void> {
     // Primeiro, verificamos se a reclamação realmente existe
-    let complaint = await ComplaintsRepository.findOne({ where: { id } });
+    let complaint = await ComplaintsRepository.findOne({ where: { id }, relations: ["user"] });
 
     // Se a reclamação não existir ou o usuário autenticado não for o autor da reclamação e não for um gerente, lançamos um erro
     // Retornamos 404 invés de 403 pelo mesmo motivo explicado no método anterior, findById
-    if (!complaint || (type === 'client' && complaint.user.id !== user_id)) {
+    if (!complaint || (type === UserTypeEnum.CLIENT && (complaint.user.id) !== user_id)) {
       throw new AppError("Complaint not found", 404);
     }
 

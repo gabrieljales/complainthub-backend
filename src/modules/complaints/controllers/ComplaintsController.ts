@@ -46,7 +46,7 @@ export class ComplaintsController {
 
     const complaintsService = new ComplaintsService();
 
-    await complaintsService.delete(+id, user_id, type);
+    await complaintsService.delete(+id, +user_id, type);
 
     return response.status(204).send();
   }
