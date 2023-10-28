@@ -1,4 +1,5 @@
 import { AppError } from "../../../shared/errors/App.Error";
+import { UserTypeEnum } from "../../accounts/infra/typeorm/entities/User";
 import { UsersService } from "../../accounts/services/UsersService";
 import { ICreateComplaintDTO } from "../dtos/ICreateComplaintDTO";
 import { IUpdateComplaintDTO } from "../dtos/IUpdateComplaintDTO";
@@ -11,7 +12,7 @@ export class ComplaintsService {
     description,
     title,
     user_id
-  }: ICreateComplaintDTO) {
+  }: ICreateComplaintDTO): Promise<void> {
     const usersService = new UsersService();
     const user = await usersService.findById(user_id);
 
@@ -34,7 +35,7 @@ export class ComplaintsService {
 
   // Método responsável por listar todas as reclamações
   async list(): Promise<Complaint[]> {
-    return await ComplaintsRepository.find();
+    return await ComplaintsRepository.find({ order: { id: "DESC" } });
   }
 
   // Método responsável por buscar uma reclamação por id
@@ -42,24 +43,6 @@ export class ComplaintsService {
     const complaint = await ComplaintsRepository.findOne({ where: { id } });
 
     return complaint;
-  }
-
-  // Método responsável por buscar reclamações por id do usuário
-  async findByUserId(user_id: number): Promise<Complaint[]> {
-    const usersService = new UsersService();
-    const user = await usersService.findById(user_id);
-
-    // Se o usuário não existir, devemos lançar um erro BadRequest
-    if (!user) {
-      throw new AppError("User not found", 404);
-    }
-
-    const complaints = await ComplaintsRepository.find({
-      where: { user },
-      relations: ["complaints"]
-    });
-
-    return complaints;
   }
 
   // Método responsável por deletar uma reclamação de acordo com o id
@@ -77,7 +60,7 @@ export class ComplaintsService {
   }
 
   // Método responsável por atualizar uma reclamação de acordo com o id
-  async update(id: number, data: IUpdateComplaintDTO): Promise<Complaint> {
+  async update(id: number, data: IUpdateComplaintDTO, user_type: UserTypeEnum): Promise<Complaint> {
     let complaint = await this.findById(id);
 
     // Se a reclamação não existir, devemos lançar um erro BadRequest
@@ -86,7 +69,9 @@ export class ComplaintsService {
     }
 
     // Se o status estiver sendo atualizado, verifique se o usuário é do tipo manager
-    if (data.status)
+    if (data.status && user_type !== UserTypeEnum.MANAGER) {
+      throw new AppError("Only managers can update the status", 403);
+    }
 
     // Combinando a reclamação existente com os novos dados
     complaint = ComplaintsRepository.merge(complaint, data);
