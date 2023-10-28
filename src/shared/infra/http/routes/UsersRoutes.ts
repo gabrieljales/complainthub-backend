@@ -9,5 +9,6 @@ const usersController = new UsersController(); // Instanciando um UsersControlle
 
 usersRoutes.post("/", usersController.create); // Rota para criar um usuário: POST /users
 usersRoutes.get("/", usersController.list); // Rota para listar usuários: GET /users
+usersRoutes.get("/:id/complaints", usersController.findAllComplaintsByUserId);
 
 export { usersRoutes };
