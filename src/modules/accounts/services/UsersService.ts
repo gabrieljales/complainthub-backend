@@ -4,6 +4,8 @@ import { User } from "../infra/typeorm/entities/User";
 import { UsersRepository } from "../infra/typeorm/repositories/UsersRepository";
 import { ICreateUserDTO } from "../dtos/ICreateUserDTO";
 import { Complaint } from "../../complaints/infra/typeorm/entities/Complaint";
+import { SendGridMailProvider } from "../../../shared/providers/mail/SendGridMailProvider";
+import { IMailDTO } from "../../../shared/providers/mail/IMailDTO";
 
 export class UsersService {
   // Método responsável por criar um usuário
@@ -14,6 +16,18 @@ export class UsersService {
     password,
     type
   }: ICreateUserDTO): Promise<void> {
+    const mailProvider = new SendGridMailProvider();
+
+    const msg: IMailDTO = {
+      to: email,
+      from: {
+        name: "ComplaintHub",
+        email: process.env.MAIL_SENDER,
+      },
+      subject: "Cadastro na plataforma ComplaintHub",
+      text: "Oi! Bem-vindo(a) ao Complainthub, a casa dos insatisfeitos e inconformados. Junte-se a nós e vamos fazer barulho juntos! 📣"
+    };
+
     // Verificando a partir do email se o usuário já existe
     const userAlreadyExists = await this.findByEmail(email);
 
@@ -37,6 +51,9 @@ export class UsersService {
     // Salvando o usuário no banco
     // Veja que esse método retorna uma Promise, por isso o uso do await
     await UsersRepository.save(newUser);
+
+    // Enviando email de confirmação de cadastro para o usuário
+    await mailProvider.sendMail(msg).catch(console.error);
   }
 
   // Método responsável por listar todos os usuários
