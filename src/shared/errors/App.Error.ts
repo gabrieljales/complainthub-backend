@@ -5,6 +5,8 @@ export class AppError {
 
   public readonly statusCode: number;
 
+  // Aqui nós recebemos a mensagem e o código de status passado
+  // Caso o código não seja fornecido, o padrão será 400
   constructor(message: string, statusCode = 400) {
     this.message = message;
     this.statusCode = statusCode;
