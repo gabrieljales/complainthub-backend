@@ -7,6 +7,7 @@ import { Complaint } from "../../complaints/infra/typeorm/entities/Complaint";
 import { SendGridMailProvider } from "../../../shared/providers/mail/SendGridMailProvider";
 import { IMailDTO } from "../../../shared/providers/mail/IMailDTO";
 
+// Service com métodos relacionados aos usuários
 export class UsersService {
   // Método responsável por criar um usuário
   async create({
@@ -16,16 +17,17 @@ export class UsersService {
     password,
     type
   }: ICreateUserDTO): Promise<void> {
-    const mailProvider = new SendGridMailProvider();
+    const mailProvider = new SendGridMailProvider(); // Instanciando um SendGridMalProvider
 
+    // Informações do email que será enviado para o usuário
     const msg: IMailDTO = {
-      to: email,
+      to: email, // Email para qual será enviado
       from: {
-        name: "ComplaintHub",
-        email: process.env.MAIL_SENDER,
+        name: "ComplaintHub", // Nome de quem está enviando o email
+        email: process.env.MAIL_SENDER, // Email que fará o envio
       },
-      subject: "Cadastro na plataforma ComplaintHub",
-      text: "Oi! Bem-vindo(a) ao Complainthub, a casa dos insatisfeitos e inconformados. Junte-se a nós e vamos fazer barulho juntos! 📣"
+      subject: "Cadastro na plataforma ComplaintHub", // Assunto do email
+      text: "Oi! Bem-vindo(a) ao Complainthub, a casa dos insatisfeitos e inconformados. Junte-se a nós e vamos fazer barulho juntos! 📣" // Corpo do texto do email com a url para redefinir a senha
     };
 
     // Verificando a partir do email se o usuário já existe
@@ -58,20 +60,20 @@ export class UsersService {
 
   // Método responsável por listar todos os usuários
   async list(): Promise<User[]> {
-    return await UsersRepository.find();
+    return await UsersRepository.find();  // Utilizando o repositório de usuários para realizar a busca
   }
 
   // Método responsável por buscar um usuário por id
   // Observação: relations é um parâmetro opcional para quando quisermos incluir uma relação na busca
   async findById(id: number, relations?: string[]): Promise<User> {
-    const user = await UsersRepository.findOne({ where: { id }, relations });
+    const user = await UsersRepository.findOne({ where: { id }, relations }); // Utilizando o repositório de usuários para realizar a busca
   
     return user;
   }
 
   // Método responsável por buscar um usuário por email
   async findByEmail(email: string): Promise<User> {
-    const user = await UsersRepository.findOne({ where: { email } });
+    const user = await UsersRepository.findOne({ where: { email } });  // Utilizando o repositório de usuários para realizar a busca
 
     return user;
   }
@@ -88,6 +90,7 @@ export class UsersService {
     // Ordenar as reclamações, por ID, em ordem decrescente e sem alterar o array original
     const userComplaintsInDescOrder = [...user.complaints].sort((a, b) => b.id - a.id);
   
+    // Retornando reclamações ordenadas
     return userComplaintsInDescOrder;
   }
 }

@@ -37,6 +37,7 @@ complaintsRoutes.delete(
 );
 
 
+// Rota para atualizar uam reclamação
 complaintsRoutes.put(
   "/:id",
   EnsureAuthenticated,
