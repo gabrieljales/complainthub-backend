@@ -117,7 +117,7 @@ O diretório `providers` contém os provedores de serviço do projeto, como o pr
 
 Para executar este projeto, siga estas etapas:
 
-1. Instale o PostgreSQL na sua máquina e crie um banco de dados. Caso você não tenha experiência com o psql, é recomendado instalar o PgAdmin para poder criar o banco de dados com ajuda da interface gráfica.
+1. Instale o PostgreSQL na sua máquina e crie um banco de dados. Caso você não tenha experiência com o psql, é recomendado instalar o [PgAdmin](https://www.pgadmin.org/download/pgadmin-4-windows/) para poder criar o banco de dados com ajuda da interface gráfica.
    1. Caso você utilize Windows, veja esse [tutorial](https://forum.casadodesenvolvedor.com.br/topic/46698-como-instalar-o-banco-de-dados-postgresql-no-windows/).
    2. Caso você utilize Linux Ubuntu ou derivados, veja esse [tutorial](https://www.edivaldobrito.com.br/como-instalar-o-postgresql-no-ubuntu-20-04-lts-e-derivados/).
    3. Caso você queira utilizar Docker, veja esse [tutorial](https://linuxhint.com/postgresql_docker/).
