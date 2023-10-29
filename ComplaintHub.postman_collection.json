@@ -1,0 +1,326 @@
+{
+	"info": {
+		"_postman_id": "ea954e42-61c9-4e85-a001-91c19b3f9ea9",
+		"name": "ComplaintHub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18731760"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"manager@complainthub.com\",\n    \"password\": \"Senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/authenticate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"João\",\n    \"last_name\": \"Coelho dos Santos\",\n    \"email\": \"weroy42701@undewp.com\",\n    \"password\": \"Senha123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoibWFuYWdlciIsImlhdCI6MTY5ODYwMDE5MiwiZXhwIjoxNjk4NjAyODkyLCJzdWIiOiIyMiJ9.sFvnMdVf_e-BzyQDPqgwKFVxp0a4U3H3ayi-dIXsOIk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAllComplaintsByUserId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiY2xpZW50IiwiaWF0IjoxNjk4NjAxMzk0LCJleHAiOjE2OTg2MDQwOTQsInN1YiI6IjQifQ.ht4dUqs4Fzf4RbmhZCIMfWm3U3XTwB--bdp5cdj-fRo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/complaints",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Password Reset Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"weroy42701@undewp.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/password-reset-token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"password-reset-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"Senha1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/reset-password/6b0feac6-4944-4ba0-877c-2227e71e7fe5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"reset-password",
+								"6b0feac6-4944-4ba0-877c-2227e71e7fe5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Complaints",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiY2xpZW50IiwiaWF0IjoxNjk4NjA3OTY4LCJleHAiOjE2OTg2MTA2NjgsInN1YiI6IjIifQ.ssYaqN99mvR83nOX3Ov6Xd_URbCJwh4RSiOHaWk-oVA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Falta de água no bairro Bom Jardim\",\n    \"description\": \"Você pode especificar que o tipo é um dos valores da enum UserTypeEnum. Isso pode ajudar a tornar seu código mais seguro e mais fácil de entender, pois limita os valores possíveis para o tipo de usuário.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/complaints",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiY2xpZW50IiwiaWF0IjoxNjk4NjAxMzk0LCJleHAiOjE2OTg2MDQwOTQsInN1YiI6IjQifQ.ht4dUqs4Fzf4RbmhZCIMfWm3U3XTwB--bdp5cdj-fRo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"ATUALIZADA\",\n    \"description\": \"Descrição atualizada\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/complaints/17",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"complaints",
+								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoibWFuYWdlciIsImlhdCI6MTY5ODU5OTkyMSwiZXhwIjoxNjk4NjAyNjIxLCJzdWIiOiIyMiJ9.B2EEGMvwIyGaKkFG2k8NDVj4TlsmnMTsCXypAJapvzw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/complaints",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"complaints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/complaints/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"complaints",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiY2xpZW50IiwiaWF0IjoxNjk4NTIwNjUwLCJleHAiOjE2OTg1MjMzNTAsInN1YiI6IjQifQ.FBRDJl1XcHezoIXPfa18fR9cDVDc_dueCzoNFTyMpXk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/complaints/16",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"complaints",
+								"16"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
