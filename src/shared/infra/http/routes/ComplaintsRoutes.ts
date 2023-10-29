@@ -38,7 +38,7 @@ complaintsRoutes.delete(
 
 
 // Rota para atualizar uam reclamação
-complaintsRoutes.put(
+complaintsRoutes.patch(
   "/:id",
   EnsureAuthenticated,
   complaintsController.update,
