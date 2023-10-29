@@ -125,6 +125,7 @@ Para executar este projeto, siga estas etapas:
    1. Observação: A parte de envio de emails exige que você crie uma conta no [SenGrid](https://sendgrid.com/) e obtenha uma API Key (chave de API).
 3. Instale as dependências do projeto com o comando `npm install`.
 4. Execute as migrações do banco de dados com o comando `npm run db:migrate`.
+5. Após rodar as migrações, você pode testar a aplicação realizando autenticação com o usuário manager criado pelas migrações. Basta utilizar o email e senha definidos no .env.
 
 Os scripts disponíveis para este projeto são:
 
