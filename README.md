@@ -127,6 +127,10 @@ Para executar este projeto, siga estas etapas:
 4. Execute as migrações do banco de dados com o comando `npm run db:migrate`.
 5. Após rodar as migrações, você pode testar a aplicação realizando autenticação com o usuário manager criado pelas migrações. Basta utilizar o email e senha definidos no .env.
 6. Caso queira testar a API com o Postman, baixar importar o arquivo "ComplaintHub.postman_collection.json" para ter todas as rotas.
+   1. Observação: Provavelmente você irá precisar criar uma variável utilizar essa coleção do Postman que está no projeto. Para configurar, basta passar o mouse por cima de "{{base_url}}", irá aparecer algo como a imagem abaixo. Basta clicar em "add new variable".
+   ![diagram](postman_variable1.png)
+   2. Agora, basta colocar o valor como "localhost:3000" e "global", como mostra a imagem a seguir.
+   ![diagram](postman_variable2.png)
 
 Os scripts disponíveis para este projeto são:
 
